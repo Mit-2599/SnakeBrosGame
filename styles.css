@@ -1,0 +1,117 @@
+:root {
+  --bg: #0f1115;
+  --panel: #1a1d24;
+  --text: #e9ecf1;
+  --muted: #a1a8b3;
+  --accent: #6bd17b;
+  --food: #e05d5d;
+  --grid: #242a36;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.app {
+  width: min(92vw, 520px);
+  display: grid;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.title {
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+
+.score {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.board-wrap {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--grid);
+  padding: 8px;
+  border-radius: 8px;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.overlay {
+  position: absolute;
+  inset: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  color: var(--text);
+  background: rgba(15, 17, 21, 0.7);
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.controls,
+.touch-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--grid);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.touch-controls {
+  flex-direction: column;
+  align-items: center;
+}
+
+.touch-controls .row {
+  display: flex;
+  gap: 8px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .touch-controls {
+    display: none;
+  }
+}

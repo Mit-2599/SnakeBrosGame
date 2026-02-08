@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Snake</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div class="title">Snake</div>
+        <div class="score" id="score">Score: 0</div>
+      </header>
+
+      <section class="board-wrap">
+        <canvas id="board" width="400" height="400" aria-label="Snake board"></canvas>
+        <div class="overlay" id="overlay" aria-live="polite"></div>
+      </section>
+
+      <section class="controls">
+        <button id="restart" class="btn">Restart</button>
+        <button id="pause" class="btn">Pause</button>
+      </section>
+
+      <section class="touch-controls" aria-label="Touch controls">
+        <button class="btn dir" data-dir="up">Up</button>
+        <div class="row">
+          <button class="btn dir" data-dir="left">Left</button>
+          <button class="btn dir" data-dir="down">Down</button>
+          <button class="btn dir" data-dir="right">Right</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
