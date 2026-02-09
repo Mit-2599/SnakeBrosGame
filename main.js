@@ -22,6 +22,7 @@ let state = createInitialState();
 let paused = false;
 let lastTime = 0;
 let accumulator = 0;
+const canVibrate = "vibrate" in navigator;
 
 const MARIO_SPRITE = [
   "....RRRRRR......",
@@ -121,6 +122,7 @@ function tick() {
   state = step(state);
   if (!state.alive) {
     setOverlay("Game Over");
+    haptic("gameover");
   }
   draw();
 }
@@ -131,6 +133,7 @@ function reset() {
   pauseBtn.textContent = "Pause";
   setOverlay("");
   draw();
+  haptic("start");
 }
 
 function togglePause() {
@@ -141,7 +144,11 @@ function togglePause() {
 }
 
 function handleDirection(dir) {
-  state = enqueueDirection(state, dir);
+  const next = enqueueDirection(state, dir);
+  if (next !== state) {
+    haptic("move");
+  }
+  state = next;
 }
 
 function resizeCanvas() {
@@ -157,6 +164,13 @@ function resizeCanvas() {
   ctx.imageSmoothingEnabled = false;
   cellSize = boardSize / GRID_SIZE;
   draw();
+}
+
+function haptic(type) {
+  if (!canVibrate) return;
+  if (type === "move") navigator.vibrate(8);
+  if (type === "start") navigator.vibrate(12);
+  if (type === "gameover") navigator.vibrate([20, 40, 20]);
 }
 
 function startLoop() {
