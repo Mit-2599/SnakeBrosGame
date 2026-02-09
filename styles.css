@@ -12,6 +12,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -20,6 +25,8 @@ body {
   display: grid;
   place-items: center;
   min-height: 100vh;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .app {
@@ -57,6 +64,7 @@ canvas {
   width: 100%;
   height: auto;
   image-rendering: pixelated;
+  touch-action: none;
 }
 
 .overlay {
@@ -89,10 +97,12 @@ canvas {
   background: var(--panel);
   color: var(--text);
   border: 1px solid var(--grid);
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.95rem;
+  min-height: 44px;
+  min-width: 64px;
 }
 
 .btn:focus-visible {
@@ -108,6 +118,22 @@ canvas {
 .touch-controls .row {
   display: flex;
   gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .app {
+    width: min(94vw, 520px);
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
