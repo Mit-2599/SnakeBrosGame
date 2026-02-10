@@ -15,6 +15,7 @@
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -24,21 +25,29 @@ body {
   background: var(--bg);
   display: grid;
   place-items: center;
-  min-height: 100vh;
+  min-height: 100svh;
+  padding: 8px 12px;
+  padding-top: calc(8px + env(safe-area-inset-top));
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
   user-select: none;
   -webkit-user-select: none;
 }
 
 .app {
-  width: min(96vw, 680px);
+  width: 100%;
+  max-width: 680px;
   display: grid;
-  gap: 16px;
+  gap: 10px;
+  height: 100%;
+  align-content: start;
+  justify-items: stretch;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  width: 100%;
 }
 
 .title {
@@ -49,6 +58,8 @@ body {
 .score {
   color: var(--muted);
   font-size: 0.95rem;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .board-wrap {
@@ -57,12 +68,17 @@ body {
   border: 1px solid var(--grid);
   padding: 6px;
   border-radius: 10px;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: min(62svh, 520px);
+  margin: 0 auto;
 }
 
 canvas {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   image-rendering: pixelated;
   touch-action: none;
 }
@@ -93,16 +109,30 @@ canvas {
   flex-wrap: wrap;
 }
 
+.controls {
+  justify-content: flex-end;
+  gap: 6px;
+  width: 100%;
+}
+
 .btn {
   background: var(--panel);
   color: var(--text);
   border: 1px solid var(--grid);
-  padding: 10px 14px;
+  padding: 14px 18px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
+  min-height: 56px;
+  min-width: 84px;
+  touch-action: manipulation;
+}
+
+.controls .btn {
+  font-size: 0.9rem;
   min-height: 44px;
-  min-width: 64px;
+  min-width: 72px;
+  padding: 8px 10px;
 }
 
 .btn:focus-visible {
@@ -113,6 +143,7 @@ canvas {
 .touch-controls {
   flex-direction: column;
   align-items: center;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .touch-controls .row {
@@ -120,10 +151,16 @@ canvas {
   gap: 8px;
 }
 
+.touch-controls .btn {
+  font-size: 1.15rem;
+  min-height: 70px;
+  min-width: 108px;
+}
+
 @media (max-width: 480px) {
   .app {
-    width: min(98vw, 680px);
-    gap: 12px;
+    width: 100%;
+    gap: 8px;
   }
 
   .title {
@@ -131,8 +168,15 @@ canvas {
   }
 
   .btn {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding: 10px 12px;
+  }
+
+  .controls .btn {
+    font-size: 0.85rem;
+    min-height: 40px;
+    min-width: 68px;
+    padding: 6px 8px;
   }
 }
 

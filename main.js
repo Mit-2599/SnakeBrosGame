@@ -201,7 +201,10 @@ document.addEventListener("keydown", (event) => {
 restartBtn.addEventListener("click", reset);
 pauseBtn.addEventListener("click", togglePause);
 touchButtons.forEach((btn) => {
-  btn.addEventListener("click", () => handleDirection(btn.dataset.dir));
+  btn.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    handleDirection(btn.dataset.dir);
+  });
 });
 
 let pointerStart = null;
